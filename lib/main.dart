@@ -51,6 +51,7 @@
 //           DeviceOrientation.portraitDown,
 //         ]);
 
+import 'package:firebase_core/firebase_core.dart';
 //         return MaterialApp(
 //           debugShowCheckedModeBanner: false,
 //           title: 'Flutter Demo',
@@ -68,32 +69,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pbcs_bible_course/New%20Views/finalcourselistscreen.dart';
 import 'package:pbcs_bible_course/provider/font_size_provider.dart';
-
-import 'features/display_formated_text.dart';
-import 'features/get_started_screen/dashboard.dart';
-import 'features/expansion_panel.dart';
-import 'features/upload_data.dart';
-import 'features/get_started_screen/first_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-    await Firebase.initializeApp();
-
-    runApp(MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => FontSizeProvider()),
-        // Add other providers if needed
-      ],
-      child: const MyApp(),
-    ));
+    runApp( ProviderScope(child: const MyApp()),
+    );
   });
 }
 
@@ -115,7 +104,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: const ExpansionPanelDemo(),
+          home: const ExpansionPanelListExample(),
           // Add other routes as needed
         );
       },

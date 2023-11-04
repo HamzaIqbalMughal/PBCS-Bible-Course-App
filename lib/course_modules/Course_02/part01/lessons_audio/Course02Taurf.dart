@@ -29,7 +29,7 @@ class _Course02Part01TaurfState extends State<Course02Part01Taurf> {
   List<AudioFile> audioFiles = [
     AudioFile(
         filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2FCourse02%2FPart01%2FTaruf.mp3?alt=media&token=7e2f2b9d-3745-4080-907a-3f541e078e6a',
+        'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2FCourse02%2FPart01%2FTaruf.mp3?alt=media&token=7e2f2b9d-3745-4080-907a-3f541e078e6a',
         label: 'Taruf'),
   ];
 

@@ -130,46 +130,42 @@ class _Course01AudioState extends State<Course01Audio> {
   }
 
   List<AudioFile> audioFiles = [
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F1.mp3?alt=media&token=813732ca-7c4e-455b-9a02-b5d73419ff68',
-        label: '1.2 taruf paragraph'),
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F2.mp3?alt=media&token=04721954-dcf0-4dec-b6ea-d152eb1712d3',
-        label: '3.2 khaliq-e-kainat paragraph'),
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F3.mp3?alt=media&token=cc55102d-90a1-4206-bd01-0c9daecc08cd',
-        label: '4.2 qadr-e-mutalik khuda paragraph'),
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F4.mp3?alt=media&token=abec99e4-b585-49c6-be5b-ce3ea9b77666',
-        label: '5.2 wahid ul lashareek khuda paragraph'),
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F5.mp3?alt=media&token=25e66e5f-3bd1-4984-aab1-14863c6f6480',
-        label: '6.1 Khuda taala aik paak zaat'),
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F6.mp3?alt=media&token=1c1273f0-66a5-4869-bbd2-75811f805b24',
-        label: '7.1 Raheem o kareem khuda'),
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F7.mp3?alt=media&token=d77304cd-b45f-4288-bf52-4eb9f50c40c9',
-        label: '8.2 parwardigar paragraph'),
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F8.mp3?alt=media&token=9800436d-37f1-4bfa-9037-03273de337e4',
-        label: '9.2 muhafiz-e-kainat paragraph'),
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F8.mp3?alt=media&token=9800436d-37f1-4bfa-9037-03273de337e4',
-        label: '10.2 rab-ul-alamin paragraph'),
-    AudioFile(
-        filePath:
-            'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F8.mp3?alt=media&token=9800436d-37f1-4bfa-9037-03273de337e4',
-        label: '11.2 seekhne ki baat paragraph L1'),
+    // AudioFile(
+    //     filePath:
+    //         'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F2.mp3?alt=media&token=04721954-dcf0-4dec-b6ea-d152eb1712d3',
+    //     label: '3.2 khaliq-e-kainat paragraph'),
+    // AudioFile(
+    //     filePath:
+    //         'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F3.mp3?alt=media&token=cc55102d-90a1-4206-bd01-0c9daecc08cd',
+    //     label: '4.2 qadr-e-mutalik khuda paragraph'),
+    // AudioFile(
+    //     filePath:
+    //         'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F4.mp3?alt=media&token=abec99e4-b585-49c6-be5b-ce3ea9b77666',
+    //     label: '5.2 wahid ul lashareek khuda paragraph'),
+    // AudioFile(
+    //     filePath:
+    //         'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F5.mp3?alt=media&token=25e66e5f-3bd1-4984-aab1-14863c6f6480',
+    //     label: '6.1 Khuda taala aik paak zaat'),
+    // AudioFile(
+    //     filePath:
+    //         'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F6.mp3?alt=media&token=1c1273f0-66a5-4869-bbd2-75811f805b24',
+    //     label: '7.1 Raheem o kareem khuda'),
+    // AudioFile(
+    //     filePath:
+    //         'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F7.mp3?alt=media&token=d77304cd-b45f-4288-bf52-4eb9f50c40c9',
+    //     label: '8.2 parwardigar paragraph'),
+    // AudioFile(
+    //     filePath:
+    //         'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F8.mp3?alt=media&token=9800436d-37f1-4bfa-9037-03273de337e4',
+    //     label: '9.2 muhafiz-e-kainat paragraph'),
+    // AudioFile(
+    //     filePath:
+    //         'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F8.mp3?alt=media&token=9800436d-37f1-4bfa-9037-03273de337e4',
+    //     label: '10.2 rab-ul-alamin paragraph'),
+    // AudioFile(
+    //     filePath:
+    //         'https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/audios%2F8.mp3?alt=media&token=9800436d-37f1-4bfa-9037-03273de337e4',
+    //     label: '11.2 seekhne ki baat paragraph L1'),
   ];
 
   @override

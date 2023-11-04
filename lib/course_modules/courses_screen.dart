@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:pbcs_bible_course/features/get_started_screen/login_screen.dart';
-import 'package:pbcs_bible_course/features/expansion_panel.dart';
 import 'package:pbcs_bible_course/utils/utils.dart';
 import '../../constants/colors.dart';
+import '../New Views/expansion_panel.dart';
 import 'Course_01/course_01.dart';
 import 'Course_01/course_01_data.dart';
 import 'Course_02/course_02.dart';
@@ -113,7 +113,7 @@ class CoursesScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ExpansionPanelDemo(),
+                      builder: (context) => NewCourseScreen(),
                     ),
                   );
                 },

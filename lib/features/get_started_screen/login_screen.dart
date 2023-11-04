@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pbcs_bible_course/New%20Views/expansion_panel.dart';
 import 'package:pbcs_bible_course/utils/utils.dart';
 import '../../constants/colors.dart';
 import 'sign_up_screen.dart';
@@ -39,12 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
             password: passwordController.text.toString())
         .then((value) {
       Utils().toastMessage('Login Successful');
-
       Navigator.push(
         // Move to second screen
         context,
         MaterialPageRoute(
-          builder: (context) => DashboardScreen(),
+          builder: (context) => const NewCourseScreen(),
         ),
       );
       setState(() {

@@ -465,131 +465,256 @@
 // }
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:pbcs_bible_course/New%20Views/courseviewscreen.dart';
 import 'package:pbcs_bible_course/constants/colors.dart';
 import 'package:pbcs_bible_course/provider/font_size_provider.dart';
-import 'package:pdf_text/pdf_text.dart';
 import 'package:provider/provider.dart';
 
-class ExpansionPanelDemo extends StatefulWidget {
+class NewCourseScreen extends StatefulWidget {
   final String pdfUrl =
       "https://firebasestorage.googleapis.com/v0/b/pbcs-bible-course-81b4b.appspot.com/o/courses%2Fcourse_01%2FTLPP%20Text%20only%20Unicode%20complete.pdf?alt=media&token=34b78844-4a7b-4d37-9330-7691be96a41d";
 
-  const ExpansionPanelDemo({Key? key}) : super(key: key);
+  const NewCourseScreen({Key? key}) : super(key: key);
 
   @override
-  _ExpansionPanelDemoState createState() => _ExpansionPanelDemoState();
+  _NewCourseScreenState createState() => _NewCourseScreenState();
 }
 
-class _ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
-  List<Item> _books = generateItems(5);
+class _NewCourseScreenState extends State<NewCourseScreen> {
+  //List<Item> _books = generateItems(3);
   String _docText = '';
   bool _isLoading = true;
   late double _fontSize;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  String formattedText = "";
+  String formattedTextc1 = "";
+  String formattedTextc21 = "";
+  String formattedTextc22 = "";
+  String formattedTextc3 = "";
+
 
   @override
   void initState() {
-    fetchFormattedText();
+    fetchFormattedTextc1();
+    fetchFormattedTextc22();
+    fetchFormattedTextc21();
+    fetchFormattedTextc3();
     super.initState();
   }
 
-  Future<void> fetchFormattedText() async {
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  //error in all methods they use same variable
+  Future<void> fetchFormattedTextc1() async {
+    //final FirebaseFirestore firestore = FirebaseFirestore.instance;
     final DocumentSnapshot snapshot =
-        await firestore.collection('Course01').doc('Lesson01').get();
+    await firestore.collection('Course01').doc('Lesson01').get();
 
     if (snapshot.exists) {
-      formattedText = snapshot['content'];
+      formattedTextc1 = snapshot['content'];
     } else {
-      formattedText = 'Error in loading the text';
+      formattedTextc1 = 'Error in loading the text';
+    }
+  }
+
+  Future<void> fetchFormattedTextc21() async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final DocumentSnapshot snapshot =
+    await firestore.collection('Course02').doc('Lesson01').get();
+
+    if (snapshot.exists) {
+      formattedTextc21 = snapshot['content'];
+    } else {
+      formattedTextc21 = 'Error in loading the text';
+    }
+  }
+
+  Future<void> fetchFormattedTextc22() async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final DocumentSnapshot snapshot =
+    await firestore.collection('Course02').doc('Lesson02').get();
+
+    if (snapshot.exists) {
+      formattedTextc22 = snapshot['content'];
+    } else {
+      formattedTextc22 = 'Error in loading the text';
+    }
+  }
+
+  Future<void> fetchFormattedTextc3() async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final DocumentSnapshot snapshot =
+    await firestore.collection('Course03').doc('Lesson01').get();
+
+    if (snapshot.exists) {
+      formattedTextc3 = snapshot['content'];
+    } else {
+      formattedTextc3 = 'Error in loading the text';
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    _fontSize = Provider.of<FontSizeProvider>(context).fontSize;
+    _fontSize = Provider
+        .of<FontSizeProvider>(context)
+        .fontSize;
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios_new),
+        automaticallyImplyLeading: false,
+        leading: const Icon(Icons.arrow_back_ios_new),
         title: const Text('Courses'),
         backgroundColor: appPrimaryColor,
         actions: [
-          GestureDetector(
-            onTap: () => _fontSizeModelBottomSheet(context),
-            child: const Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: Icon(
-                Icons.more_vert,
-                size: 28,
-              ),
-            ),
-          )
+          // GestureDetector(
+          //   onTap: () => _fontSizeModelBottomSheet(context),
+          //   child: const Padding(
+          //     padding: EdgeInsets.only(right: 10),
+          //     child: Icon(
+          //       Icons.more_vert,
+          //       size: 28,
+          //     ),
+          //   ),
+          // )
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.only(top: 20),
-          child: _buildPanel(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * .02,),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              CourseScreen(text: formattedTextc1,title: 'Course 01',lessonNo:'')));
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: appPrimaryColor,
+                            offset: const Offset(
+                              3.0,
+                              3.0,
+                            ),
+                            blurRadius: 5.0,
+                            spreadRadius: 3.0,
+                          ), //BoxShadow
+                          const BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ),
+                        ]
+                    ),
+                    padding: const EdgeInsets.only(top: 15, bottom: 10),
+                    child: Center(
+                      child: ListTile(
+                        leading: Icon(
+                          CupertinoIcons.book_fill, color: appPrimaryColor,),
+                        title: const Text('Course 01', style: TextStyle(fontSize: 18),),
+                        trailing: const Icon(Icons.more_vert),
+                      ),
+                    )
+                ),
+              ),
+              SizedBox(height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * .02,),
+              InkWell(
+                onTap: () {
+                  lessonBottomSheet(context,formattedTextc21,formattedTextc22);
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: appPrimaryColor,
+                            offset: const Offset(
+                              3.0,
+                              3.0,
+                            ),
+                            blurRadius: 5.0,
+                            spreadRadius: 3.0,
+                          ), //BoxShadow
+                          const BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ),
+                        ]
+                    ),
+                    padding: const EdgeInsets.only(top: 15, bottom: 10),
+                    child: Center(
+                      child: ListTile(
+                        leading: Icon(
+                          CupertinoIcons.book_fill, color: appPrimaryColor,),
+                        title: const Text('Course 02', style: TextStyle(fontSize: 18),),
+                        trailing: const Icon(Icons.more_vert),
+                      ),
+                    )
+                ),
+              ),
+              SizedBox(height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * .02,),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              CourseScreen(text: formattedTextc3,title: 'Course 03',lessonNo:'')));
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: appPrimaryColor,
+                            offset: const Offset(
+                              3.0,
+                              3.0,
+                            ),
+                            blurRadius: 5.0,
+                            spreadRadius: 3.0,
+                          ), //BoxShadow
+                          const BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ),
+                        ]
+                    ),
+                    padding: const EdgeInsets.only(top: 15, bottom: 10),
+                    child: Center(
+                      child: ListTile(
+                        leading: Icon(
+                          CupertinoIcons.book_fill, color: appPrimaryColor,),
+                        title: const Text('Course 03', style: TextStyle(fontSize: 18),),
+                        trailing: const Icon(Icons.more_vert),
+                      ),
+                    )
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-
-  Widget _buildPanel() {
-    return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          _books[index].isExpanded = !isExpanded;
-        });
-      },
-      children: _books.map<ExpansionPanel>((Item item) {
-        return ExpansionPanel(
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return const ListTile(
-              title: Text(
-                "Course 01",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  // fontFamily: 'Gulzar-Regular',
-                  fontSize: 16,
-                ),
-              ),
-            );
-          },
-          body: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 16),
-            child:
-                // _isLoading
-                //     ? const CircularProgressIndicator()
-                //     :
-                Expanded(
-              child: Directionality(
-                textDirection: TextDirection.rtl,
-                child: SingleChildScrollView(
-                  child: Text(
-                    formattedText,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      // fontFamily: 'Gulzar-Regular',
-                      fontSize: _fontSize,
-                    ),
-                    textAlign: TextAlign.right,
-                    textDirection: TextDirection.ltr,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          isExpanded: item.isExpanded,
-        );
-      }).toList(),
-    );
-  }
-
+}
   void _fontSizeModelBottomSheet(BuildContext context) {
     double fontSize =
         Provider.of<FontSizeProvider>(context, listen: false).fontSize;
@@ -612,7 +737,7 @@ class _ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
           child: SingleChildScrollView(
             child: Container(
               height: 600,
-              color: Color(0xF2F5F9FF),
+              color: const Color(0xF2F5F9FF),
               child: ListView(
                 shrinkWrap: true,
                 padding:
@@ -671,7 +796,7 @@ class _ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
                     ),
                   ),
 
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   Positioned(
                     bottom: 10,
                     child: Container(
@@ -728,43 +853,146 @@ class _ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
       ),
     );
   }
-
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          color: Colors.white,
-          child: Center(
-            child: Text(
-              'This is an empty bottom sheet!',
-              style: TextStyle(fontSize: 20),
-            ),
+void lessonBottomSheet(BuildContext context,String lesson1,String lesson2) {
+  showModalBottomSheet<void>(
+    isScrollControlled: true,
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24),
+        topRight: Radius.circular(24),
+      ),
+    ),
+    builder: (context) => StatefulBuilder(
+      builder: (context, setState) => ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * .3,
+          width: MediaQuery.of(context).size.width * 1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * .05,),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CourseScreen(text: lesson1,title: 'Course 02',lessonNo:'')));
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .08,
+                  width: MediaQuery.of(context).size.width * .5,
+                  decoration: BoxDecoration(
+                    color: appPrimaryColor,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Text(
+                        "Lesson 01",
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      ),
+                      Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.white),
+                          child: const Icon(
+                            Icons.arrow_right_alt_outlined,
+                            size: 25.0,
+                            color: Colors.green,
+                          ))
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * .009,),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CourseScreen(text: lesson2,title: 'Course 02',lessonNo:'')));
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .08,
+                  width: MediaQuery.of(context).size.width * .5,
+                  decoration: BoxDecoration(
+                    color: appPrimaryColor,
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Text(
+                        "Lesson 02",
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      ),
+                      Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.white),
+                          child: const Icon(
+                            Icons.arrow_right_alt_outlined,
+                            size: 25.0,
+                            color: Colors.green,
+                          ))
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        );
-      },
-    );
-  }
+        )
+      ),
+    ),
+  );
 }
-
-// stores ExpansionPanel state information
-class Item {
-  Item({
-    required this.expandedValue,
-    required this.headerValue,
-    this.isExpanded = false,
-  });
-
-  String expandedValue;
-  String headerValue;
-  bool isExpanded;
-}
-
-List<Item> generateItems(int numberOfItems) {
-  return List.generate(numberOfItems, (int index) {
-    return Item(
-      headerValue: 'Book $index',
-      expandedValue: 'Details for Book $index goes here',
-    );
-  });
-}
+//   void _showBottomSheet(BuildContext context) {
+//     showModalBottomSheet<void>(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return Container(
+//           color: Colors.white,
+//           child: Center(
+//             child: Text(
+//               'This is an empty bottom sheet!',
+//               style: TextStyle(fontSize: 20),
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
+//
+// // stores ExpansionPanel state information
+// class Item {
+//   Item({
+//     required this.expandedValue,
+//     required this.headerValue,
+//     this.isExpanded = false,
+//   });
+//
+//   String expandedValue;
+//   String headerValue;
+//   bool isExpanded;
+// }
+//
+// List<Item> generateItems(int numberOfItems) {
+//   return List.generate(numberOfItems, (int index) {
+//     return Item(
+//       headerValue: 'Book $index',
+//       expandedValue: 'Details for Book $index goes here',
+//     );
+//   });
+// }

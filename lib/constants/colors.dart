@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 /* -- LIST OF ALL COLORS -- */
 
 // ignore: prefer_const_constructors
-final appPrimaryColor = Color(0xFFFDB515).withOpacity(0.82);
-final tSecondaryColor = const Color(0xFFF8E1D7).withOpacity(0.86);
+final appPrimaryColor = Color(0xFFDA0C92).withOpacity(0.86);
+const greyColor = Color(0xffCBCACA);
+final tSecondaryColor = const Color(0xFFDA0C92).withOpacity(0.86);
 //const tAccentColor = Color(0xFF001BFF);
 
 // ignore: non_constant_identifier_names
-MaterialColor MaterialPrimaryColor = const MaterialColor(0xFFFDB515, {
+MaterialColor MaterialPrimaryColor = const MaterialColor(
+    0xFFE06C4, {
   50: Color(0xFFFFF8E1),
   100: Color(0xFFFFF1C1),
   200: Color(0xFFFFE998),

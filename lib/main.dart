@@ -69,8 +69,9 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pbcs_bible_course/New%20Views/finalcourselistscreen.dart';
+import 'package:pbcs_bible_course/New%20Views/sliderprovider.dart';
+import 'package:pbcs_bible_course/features/get_started_screen/login_screen.dart';
 import 'package:pbcs_bible_course/provider/font_size_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -81,7 +82,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
-    runApp( ProviderScope(child: const MyApp()),
+    runApp(const MyApp()
     );
   });
 }
@@ -91,24 +92,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (context, orientation) {
-        SystemChrome.setPreferredOrientations([
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown,
-        ]);
-
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: const ExpansionPanelListExample(),
-          // Add other routes as needed
-        );
-      },
-    );
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => SliderProvider()),
+    ],
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const ExpansionPanelListExample(),
+      // Add other routes as needed
+    ),);
   }
 }
 

@@ -72,6 +72,7 @@ import 'package:flutter/services.dart';
 import 'package:pbcs_bible_course/New%20Views/finalcourselistscreen.dart';
 import 'package:pbcs_bible_course/New%20Views/sliderprovider.dart';
 import 'package:pbcs_bible_course/features/get_started_screen/login_screen.dart';
+import 'package:pbcs_bible_course/features/get_started_screen/splash_screen.dart';
 import 'package:pbcs_bible_course/provider/font_size_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -101,7 +102,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ExpansionPanelListExample(),
+      // home: const ExpansionPanelListExample(),
+      home: SplashScreen(),
       // Add other routes as needed
     ),);
   }

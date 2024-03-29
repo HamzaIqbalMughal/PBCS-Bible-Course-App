@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:pbcs_bible_course/New%20Views/courseviewscreen.dart';
 import '../../../../constants/colors.dart';
 
 class AudioFile {
@@ -62,6 +63,20 @@ class _Course02Part01TaurfState extends State<Course02Part01Taurf> {
         });
       });
     }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    players.forEach((player) {
+      player.dispose();
+    });
+
+    isPlayingList.clear();
+    durationList.clear();
+    positionList.clear();
+
   }
 
   void playAudio(int index) {

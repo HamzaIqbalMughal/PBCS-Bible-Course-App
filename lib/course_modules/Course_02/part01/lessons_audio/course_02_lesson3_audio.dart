@@ -106,6 +106,19 @@ class _Course02Part01Lesson03AudioState
     }
   }
 
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    players.forEach((player) {
+      player.dispose();
+    });
+
+    isPlayingList.clear();
+    durationList.clear();
+    positionList.clear();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

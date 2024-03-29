@@ -90,6 +90,19 @@ class _Course02Part01Lesson04AudioState
     }
   }
 
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    players.forEach((player) {
+      player.dispose();
+    });
+
+    isPlayingList.clear();
+    durationList.clear();
+    positionList.clear();
+
+  }
+
   void playAudio(int index) {
     if (!isPlayingList[index]) {
       players[index].play(UrlSource(audioFiles[index].filePath));

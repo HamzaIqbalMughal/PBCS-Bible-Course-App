@@ -1,23 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pbcs_bible_course/New%20Views/expansion_panel.dart';
-import 'package:pbcs_bible_course/features/get_started_screen/forgot_password_screen.dart';
-import 'package:pbcs_bible_course/utils/utils.dart';
-import '../../constants/colors.dart';
-import 'sign_up_screen.dart';
-import 'dashboard.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../../constants/colors.dart';
+import '../../utils/utils.dart';
+
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _LoginScreenState createState() => _LoginScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   bool loading = false;
   final phoneNumberController = TextEditingController();
   final passwordController = TextEditingController();
@@ -30,35 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     phoneNumberController.dispose();
     passwordController.dispose();
-  }
-
-  void login() {
-    setState(() {
-      loading = true;
-    });
-    _auth
-        .signInWithEmailAndPassword(
-            email: '${phoneNumberController.text}@example.com',
-            password: passwordController.text.toString())
-        .then((value) {
-      Utils().toastMessage('Login Successful');
-      Navigator.push(
-        // Move to second screen
-        context,
-        MaterialPageRoute(
-          builder: (context) => const NewCourseScreen(),
-        ),
-      );
-      setState(() {
-        loading = false;
-      });
-    }).onError((error, stackTrace) {
-      debugPrint(error.toString());
-      Utils().toastMessage(error.toString());
-      setState(() {
-        loading = false;
-      });
-    });
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -227,8 +193,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 10),
                           _buildPhone(),
-                          const SizedBox(height: 20),
-                          _buildPassword(),
+                          // const SizedBox(height: 20),
+                          // _buildPassword(),
                           const SizedBox(height: 20),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -240,78 +206,29 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                login();
+
+                                // _auth.res
+
+
                                 // AuthenticateUser(_phone, _password);
                               }
                             },
                             child: loading
                                 ? const CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white),
-                                  )
-                                : const Text('Log In'),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white),
+                            )
+                                : const Text('Reset Password'),
                             // child: const Text(
                             //   'Log In',
                             // ),
                           ),
-                          const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordScreen()));
-                              },
-                              child: Text(
-                                'Forgot Password?',
-                                style: TextStyle(
-                                  color: Colors.lightBlue,
-                                ),
-                              ),
-                            ),
-                          ),
+
                         ],
                       ),
                     ),
                   ),
                   // const SizedBox(height: 10),
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Text(
-                        'Don\'t have an account?',
-                        // textDirection: TextDirection.ltr,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      GestureDetector(
-                        child: const Text(
-                          ' Sign Up',
-                          // textDirection: TextDirection.ltr,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.amberAccent,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignUpScreen(),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
